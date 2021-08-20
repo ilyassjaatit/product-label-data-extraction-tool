@@ -8,7 +8,10 @@ services:
     image: backend-pldet
     volumes:
       - ./backend:/backend
-  db:
+    depends_on:
+      - postgresql
+
+  postgresql:
       image: postgres:13.4
       env_file:
         - .env
