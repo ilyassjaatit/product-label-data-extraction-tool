@@ -1,0 +1,26 @@
+exclude: 'docs|node_modules|migrations|.git|.tox'
+default_language_version:
+  python: python3.9
+repos:
+  - repo: https://github.com/pycqa/isort
+    rev: 5.9.3
+    hooks:
+      - id: isort
+        additional_dependencies: [ "toml" ]
+  - repo: https://github.com/psf/black
+    rev: 21.7b0
+    hooks:
+      - id: black
+        args: [--config=backend/pyproject.toml, --check, --diff, backend/]
+        language_version: python3.9
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+        args: [--config=backend/setup.cfg, backend/]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: debug-statements
+      - id: trailing-whitespace
+      - id: check-yaml

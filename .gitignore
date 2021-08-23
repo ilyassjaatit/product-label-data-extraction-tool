@@ -76,7 +76,7 @@ ENV/
 
 # mkdocs documentation
 /site
-
+.env
 # mypy
 .mypy_cache/
 
@@ -219,7 +219,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-
+./.idea
 
 ### Windows template
 # Windows thumbnail cache files
@@ -327,3 +327,6 @@ tags
 .pytest_cache/
 
 .ipython/
+
+# Django
+/backend/db.sqlite3

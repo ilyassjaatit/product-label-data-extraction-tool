@@ -3,14 +3,20 @@ services:
   backend: &backend
     build:
       context: .
+      dockerfile: ./docker/Dockerfile
+    container_name: backend
     ports:
       - 8000:8000
     image: backend-pldet
     volumes:
       - ./backend:/backend
-  db:
-      image: postgres:13.4
-      env_file:
-        - .env
-      ports:
-        - 15432:5432
+    depends_on:
+      - postgresql
+    command: /start
+
+  postgresql:
+    image: postgres:13.4
+    env_file:
+      - .env
+    ports:
+      - 15432:5432
