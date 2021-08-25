@@ -8,6 +8,8 @@ services:
     ports:
       - 8000:8000
     image: backend-pldet
+    env_file:
+      - .env
     volumes:
       - ./backend:/backend
     depends_on:
