@@ -19,6 +19,6 @@ force-exclude = '''
 '''
 
 [tool.isort]
-default_section = THIRDPARTY
-known_django = django
-sections = FUTURE,STDLIB,DJANGO,THIRDPARTY,FIRSTPARTY,LOCALFOLDER
+default_section = 'THIRDPARTY'
+known_django = 'django'
+sections = 'FUTURE,STDLIB,DJANGO,THIRDPARTY,FIRSTPARTY,LOCALFOLDER'

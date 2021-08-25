@@ -1,9 +1,25 @@
-# Base project
-Django==3.2.6
+# Base
+pytz==2021.1
+argon2-cffi==20.1.0
+psycopg2==2.9.1
 
-# Dev tools
+# Base project Django
+Django==3.2.6
+django-environ==0.4.5
+whitenoise==5.3.0
+
+# Code quality
+# ------------------------------------------------------------------------------
 flake8==3.9.2
 mypy==0.910
 black==21.7b0
 isort==5.9.3
 pre-commit==2.14.0
+
+## Test
+pytest==6.2.4
+factory-boy==3.2.0
+
+# dev tools
+# ------------------------------------------------------------------------------
+django-extensions==3.1.3
