@@ -21,3 +21,6 @@
 `docker-compose run --rm backend black .`
 #### Run flake8
 `docker-compose run --rm backend flake8 .`
+
+## Run tests
+`docker-compose run --rm backend pytest`
