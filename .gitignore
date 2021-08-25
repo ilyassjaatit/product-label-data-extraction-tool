@@ -330,3 +330,7 @@ tags
 
 # Django
 /backend/db.sqlite3
+
+#Only in the MVP process
+/backend/apps/*/migrations/
+!/backend/apps/*/migrations/__init__.py
