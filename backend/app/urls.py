@@ -19,6 +19,7 @@ from django.urls import include, path
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
+from apps.products.api.views import ProductRawDataViewSet
 from apps.users.api.views import UserViewSet
 
 urlpatterns = [
@@ -28,6 +29,7 @@ urlpatterns = [
 # api Urls
 router = routers.DefaultRouter()
 router.register(r"users", UserViewSet)
+router.register(r"product-raw-data", ProductRawDataViewSet)
 
 urlpatterns += [
     # DRF auth token
