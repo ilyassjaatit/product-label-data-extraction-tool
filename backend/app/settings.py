@@ -43,7 +43,10 @@ DJANGO_APPS = [
 # Third party apps
 THIRD_PARTY_APPS = []
 # Local apps
-LOCAL_APPS = ["apps.products.apps.ProductConfig"]
+LOCAL_APPS = [
+    "apps.products.apps.ProductConfig",
+    "apps.users.apps.UsersConfig",
+]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -107,6 +110,9 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
+AUTH_USER_MODEL = "users.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
