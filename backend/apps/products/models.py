@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class ProductRowData(models.Model):
+class ProductRawData(models.Model):
     """Raw data of a product
     Attributes:
         name (str): name
@@ -22,7 +22,7 @@ class ProductRowData(models.Model):
     ]
     name = models.CharField(max_length=256, null=False)
     geeks_field = models.CharField(max_length=2, choices=SOURCES_CHOICES, default=MANUAL_INPUT)
-    row_data = models.JSONField()
+    raw_data = models.JSONField()
     is_processed = models.BooleanField(default=False)
     is_validate = models.BooleanField(default=False)
 
@@ -35,4 +35,4 @@ class Product(models.Model):
     """
 
     name = models.CharField(max_length=256, null=False)
-    product_row_data = models.ForeignKey(ProductRowData, on_delete=models.CASCADE, null=True)
+    product_raw_data = models.ForeignKey(ProductRawData, on_delete=models.CASCADE, null=True)
