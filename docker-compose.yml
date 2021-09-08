@@ -4,7 +4,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    container_name: backend
     ports:
       - 8000:8000
     image: backend-pldet
@@ -15,10 +14,26 @@ services:
     depends_on:
       - postgresql
     command: /start
-
   postgresql:
     image: postgres:13.4
     env_file:
       - .env
     ports:
       - 15432:5432
+  rabbitmq:
+    image: 'rabbitmq:3.8.14-alpine'
+    ports:
+      - 5672:5672
+  celeryworker:
+    <<: *backend
+    image: celery-worker
+    ports: [ ]
+    depends_on:
+      - postgresql
+      - rabbitmq
+    command: "celery -A app.celery worker -l DEBUG"
+  flower:
+    image: mher/flower
+    command: [ "flower", "--broker=amqp://guest:guest@localhost:5672//", "--port=8888" ]
+    ports:
+      - 8888:8888
