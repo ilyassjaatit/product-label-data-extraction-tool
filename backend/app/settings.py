@@ -44,6 +44,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
+    "django_celery_beat",
 ]
 # Local apps
 LOCAL_APPS = [
@@ -55,7 +56,6 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # development apps
 INSTALLED_APPS += ["django_extensions"]
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -164,7 +164,6 @@ STATICFILES_FINDERS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 # django-rest-framework
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
@@ -175,3 +174,11 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
+
+# Celery settings
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_BROKER_PROTOCOL = env("CELERY_BROKER_PROTOCOL", default="amqp")
+CELERY_BROKER_HOST = env("CELERY_BROKER_HOST", default="rabbitmq")
+CELERY_BROKER_PORT = env("CELERY_BROKER_PORT", default=5672)
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_ACCEPT_CONTENT = ["json"]
