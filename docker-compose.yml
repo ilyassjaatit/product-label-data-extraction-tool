@@ -20,6 +20,9 @@ services:
       - .env
     ports:
       - 15432:5432
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data:Z
+      - local_postgres_data_backups:/backups:z
   rabbitmq:
     image: 'rabbitmq:3.8.14-alpine'
     ports:
@@ -32,8 +35,22 @@ services:
       - postgresql
       - rabbitmq
     command: "celery -A app.celery worker -l DEBUG"
+  celery-beat:
+    <<: *backend
+    image: celery-beat
+    depends_on:
+      - postgresql
+      - rabbitmq
+    command: "celery -A app.celery beat -l DEBUG"
+    ports: [ ]
   flower:
-    image: mher/flower
-    command: [ "flower", "--broker=amqp://guest:guest@localhost:5672//", "--port=8888" ]
+    <<: *backend
+    command: "celery -A app.celery flower  --broker=amqp://guest:guest@localhost:5672// "
     ports:
-      - 8888:8888
+      - 5555:5555
+    depends_on:
+      - postgresql
+      - rabbitmq
+volumes:
+  local_postgres_data: { }
+  local_postgres_data_backups: { }

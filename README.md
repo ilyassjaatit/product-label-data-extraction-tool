@@ -6,7 +6,7 @@
    `cp .env.dev.sample .env`
 2. Run project <br>
    `docker-compose up` <br>
-    Access url: http://127.0.0.1:8000/
+    Access url: http://127.0.0.1:8000/ <br> flow url http://localhost:5555/
 3. Run interactive mode pdb <br>
    `docker-compose up -d &   docker-compose stop backend & docker-compose run --rm --service-ports backend`
 ## Administrative commands
