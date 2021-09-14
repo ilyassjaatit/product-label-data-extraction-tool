@@ -51,6 +51,22 @@ services:
     depends_on:
       - postgresql
       - rabbitmq
+  selenium_hub:
+    image: selenium/hub
+    ports:
+      - 4444:4444
+  chrome:
+    image: selenium/node-chrome
+    depends_on:
+      - selenium_hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium_hub
+  firefox:
+    image: selenium/node-firefox
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium_hub
+    depends_on:
+      - selenium_hub
 volumes:
   local_postgres_data: { }
   local_postgres_data_backups: { }

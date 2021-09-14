@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "apps.products.apps.ProductConfig",
     "apps.users.apps.UsersConfig",
+    "apps.users.apps.GathererConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
