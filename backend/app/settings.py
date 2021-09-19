@@ -50,7 +50,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "apps.products.apps.ProductConfig",
     "apps.users.apps.UsersConfig",
-    "apps.users.apps.GathererConfig",
+    "apps.gatherer.apps.GathererConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -183,3 +183,8 @@ CELERY_BROKER_HOST = env("CELERY_BROKER_HOST", default="rabbitmq")
 CELERY_BROKER_PORT = env("CELERY_BROKER_PORT", default=5672)
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_ACCEPT_CONTENT = ["json"]
+
+# Selenium hub
+SELENIUM_HUB_HOST = env("SELENIUM_HUB_HOST", default="selenium_hub")
+SELENIUM_HUB_PORT = env("SELENIUM_HUB_PORT", default=4444)
+SELENIUM_HUB_URL = env("SELENIUM_HUB_URL", default="selenium_hub:4444/wd/hub")
