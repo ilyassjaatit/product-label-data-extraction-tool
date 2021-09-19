@@ -19,6 +19,7 @@ from django.urls import include, path
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
+from apps.gatherer.views import view_test_selenium
 from apps.users.api.views import UserViewSet
 
 urlpatterns = [
@@ -33,4 +34,5 @@ urlpatterns += [
     # DRF auth token
     path("auth-token/", obtain_auth_token),
     path("api/", include((router.urls, "api"))),
+    path("gatherer/", view_test_selenium, name="view-test-selenium"),
 ]
