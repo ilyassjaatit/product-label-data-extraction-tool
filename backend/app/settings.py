@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import socket
 from pathlib import Path
 
 import environ
@@ -54,9 +54,6 @@ LOCAL_APPS = [
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
-# development apps
-INSTALLED_APPS += ["django_extensions"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -188,3 +185,23 @@ CELERY_ACCEPT_CONTENT = ["json"]
 SELENIUM_HUB_HOST = env("SELENIUM_HUB_HOST", default="selenium_hub")
 SELENIUM_HUB_PORT = env("SELENIUM_HUB_PORT", default=4444)
 SELENIUM_HUB_URL = env("SELENIUM_HUB_URL", default="selenium_hub:4444/wd/hub")
+
+# Development Settings
+# --------------------------------------------------------------------------------------------
+
+# Development apps
+INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
+
+# For docker debug_toolbar
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS += [".".join(ip.split(".")[:-1] + ["1"]) for ip in ips]
+INSTALLED_APPS += ["django_extensions"]
+INSTALLED_APPS += ["debug_toolbar"]
+# Middleware development
+MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+
+# https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html#debug-toolbar-config
+DEBUG_TOOLBAR_CONFIG = {
+    "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],
+    "SHOW_TEMPLATE_CONTEXT": True,
+}
